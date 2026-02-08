@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="stylesheet" href="/style.css" />
+  <title>Student Clubs Hub</title>
+</head>
+<body>
+  <nav>
+    <div class="container">
+      <div>
+        <a href="/index.html"><b>Clubs Hub</b></a>
+        <a href="/clubs.html">Clubs</a>
+        <a href="/profile.html">Profile</a>
+
+      </div>
+      <div id="navRight"></div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="card">
+      <h2>Student Clubs Hub</h2>
+      <p>Register, login, create and manage your clubs.</p>
+      <div class="row">
+        <a href="/register.html"><button class="secondary">Register</button></a>
+        <a href="/login.html"><button>Login</button></a>
+      </div>
+      <p><small>This is a minimal frontend for the backend course.</small></p>
+    </div>
+  </div>
+
+  <script src="/app.js"></script>
+  <script>
+    (async () => {
+      const navRight = document.getElementById("navRight");
+      const profile = await fetchProfile();
+      if (profile) {
+        navRight.innerHTML = `<span style="margin-right:12px;">${profile.username}</span>
+          <button class="secondary" onclick="logout()">Logout</button>`;
+      } else {
+        navRight.innerHTML = `<a href="/login.html">Login</a>`;
+      }
+    })();
+  </script>
+</body>
+</html>

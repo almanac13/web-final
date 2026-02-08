@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="stylesheet" href="/style.css" />
+  <title>My Clubs</title>
+</head>
+<body>
+  <nav>
+    <div class="container">
+      <div>
+        <a href="/index.html"><b>Clubs Hub</b></a>
+        <a href="/clubs.html">Clubs</a>
+        <a href="/profile.html">Profile</a>
+      </div>
+      <div id="navRight"></div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="card">
+      <h2>My Clubs</h2>
+      <div id="msg"></div>
+
+      <h3>Create Club</h3>
+
+      <div class="row">
+        <input class="half" id="name" placeholder="Club name (min 2)" required minlength="2" />
+        <input class="half" id="category" placeholder="Category (min 2)" required minlength="2" />
+      </div>
+
+      <textarea id="description" placeholder="Description (optional)"></textarea>
+
+      <!-- ✅ Department Key -->
+      <input id="deptKey" placeholder="Department Key (required to create club)" required />
+
+      <button onclick="createClub()">Create</button>
+
+      <p><small>Only users with a valid department key can create clubs.</small></p>
+      <p><small>No key? <a href="/request-key.html">Request a department key</a></small></p>
+
+    </div>
+
+    <div class="card">
+      <h3>List</h3>
+      <div id="list"></div>
+    </div>
+  </div>
+
+  <script src="/app.js"></script>
+  <script src="/clubs.js"></script>
+</body>
+</html>

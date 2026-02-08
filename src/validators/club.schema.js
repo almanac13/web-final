@@ -4,6 +4,8 @@ const createClubSchema = Joi.object({
   name: Joi.string().min(2).max(60).required(),
   category: Joi.string().min(2).max(30).required(),
   description: Joi.string().allow("").max(500),
+  departmentKey: Joi.string().min(3).max(80).required(),
+
 });
 
 const updateClubSchema = Joi.object({

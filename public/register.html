@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="stylesheet" href="/style.css" />
+  <title>Register</title>
+</head>
+<body>
+  <nav><div class="container"><a href="/index.html"><b>Clubs Hub</b></a></div></nav>
+
+  <div class="container">
+    <div class="card">
+      <h2>Register</h2>
+      <div id="msg"></div>
+
+      <div class="row">
+        <input class="half" id="username" placeholder="username (min 3)" minlength="3" required />
+        <input class="half" id="email" placeholder="email" type="email" required />
+      </div>
+      <input id="password" placeholder="password (min 6)" type="password" minlength="6" required />
+      <button onclick="register()">Create account</button>
+      <p><small>Already have account? <a href="/login.html">Login</a></small></p>
+    </div>
+  </div>
+
+  <script src="/app.js"></script>
+  <script>
+    function show(type, text) {
+      document.getElementById("msg").innerHTML = `<div class="${type}">${text}</div>`;
+    }
+
+    async function register() {
+      const username = document.getElementById("username").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+
+      if (username.length < 3) return show("err", "Username must be at least 3 characters.");
+      if (!email.includes("@")) return show("err", "Email looks invalid.");
+      if (password.length < 6) return show("err", "Password must be at least 6 characters.");
+
+      const res = await fetch("/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, email, password })
+      });
+
+      const data = await res.json();
+      if (!res.ok) return show("err", data.error || "Register failed");
+
+      show("ok", "Registered! Now login.");
+      setTimeout(() => window.location.href = "/login.html", 800);
+    }
+  </script>
+</body>
+</html>

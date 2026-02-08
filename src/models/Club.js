@@ -6,6 +6,8 @@ const clubSchema = new mongoose.Schema(
     category: { type: String, required: true, trim: true },
     description: { type: String, default: "" },
     owner: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+    department: { type: String, default: "" },
+
   },
   { timestamps: true }
 );

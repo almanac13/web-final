@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="stylesheet" href="/style.css" />
+  <title>Login</title>
+</head>
+<body>
+  <nav><div class="container"><a href="/index.html"><b>Clubs Hub</b></a></div></nav>
+
+  <div class="container">
+    <div class="card">
+      <h2>Login</h2>
+      <div id="msg"></div>
+
+      <input id="email" placeholder="email" type="email" required />
+      <input id="password" placeholder="password" type="password" required />
+      <button onclick="login()">Login</button>
+
+      <p><small>No account? <a href="/register.html">Register</a></small></p>
+    </div>
+  </div>
+
+  <script src="/app.js"></script>
+  <script>
+    function show(type, text) {
+      document.getElementById("msg").innerHTML = `<div class="${type}">${text}</div>`;
+    }
+
+    async function login() {
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+
+      if (!email.includes("@")) return show("err", "Email looks invalid.");
+      if (!password) return show("err", "Password required.");
+
+      const res = await fetch("/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password })
+      });
+
+      const data = await res.json();
+      if (!res.ok) return show("err", data.error || "Login failed");
+
+      setToken(data.token);
+      window.location.href = "/clubs.html";
+    }
+  </script>
+</body>
+</html>
