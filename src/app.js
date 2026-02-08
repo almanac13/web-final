@@ -1,19 +1,16 @@
 const express = require("express");
-const User = require("./models/user"); // проверь имя файла
+const authRoutes = require("./routes/auth.routes");
+const userRoutes = require("./routes/user.routes");
 
 const app = express();
-
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.json({ message: "Clubs Hub API is running ✅" });
-});
+app.get("/", (req, res) => res.json({ message: "Clubs Hub API is running ✅" }));
 
-// временный тестовый роут
-app.post("/test-user", async (req, res) => {
-  const { username, email } = req.body;
-  const user = await User.create({ username, email });
-  res.json({ message: "User created", user });
-});
+app.use("/auth", authRoutes);
+
+app.use("/users", userRoutes);
+
+
 
 module.exports = app;
