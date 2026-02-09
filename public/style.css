@@ -18,3 +18,48 @@ nav a:hover { text-decoration: underline; }
 @media (min-width: 640px) {
   .half { width: 49%; }
 }
+.carousel {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 12px 4px;
+  scroll-behavior: smooth;
+}
+.carousel::-webkit-scrollbar { height: 10px; }
+.carousel::-webkit-scrollbar-thumb { background: #cfd3dc; border-radius: 10px; }
+
+.clubCard {
+  min-width: 260px;
+  max-width: 260px;
+}
+.tag {
+  display:inline-block;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background:#e9eefc;
+  border:1px solid #c9d7ff;
+  color:#1b66ff;
+  font-size:12px;
+}
+.carousel {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 12px 4px;
+  scroll-behavior: smooth;
+}
+.carousel::-webkit-scrollbar { height: 10px; }
+.carousel::-webkit-scrollbar-thumb { background: #cfd3dc; border-radius: 10px; }
+
+.clubCard { min-width: 260px; max-width: 260px; }
+
+.tag {
+  display:inline-block;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background:#e9eefc;
+  border:1px solid #c9d7ff;
+  color:#1b66ff;
+  font-size:12px;
+}
+button { cursor: pointer; }

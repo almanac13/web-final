@@ -1,20 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <link rel="stylesheet" href="/style.css" />
-  <title>Request Department Key</title>
+  <link rel="stylesheet" href="/style.css"/>
+  <title>Request Key</title>
 </head>
 <body>
   <nav>
     <div class="container">
-      <div>
-        <a href="/index.html"><b>Clubs Hub</b></a>
-        <a href="/clubs.html">Clubs</a>
-        <a href="/profile.html">Profile</a>
-        <a href="/request-key.html">Request Key</a>
-      </div>
+      <div id="navLinks"></div>
+      <div id="navRight"></div>
     </div>
   </nav>
 
@@ -23,19 +19,22 @@
       <h2>Request Department Key</h2>
       <div id="msg"></div>
 
-      <input id="name" placeholder="Your name" required minlength="2" />
-      <input id="email" placeholder="Email" type="email" required />
-      <input id="department" placeholder="Department (e.g., CS Department)" required minlength="2" />
-      <textarea id="message" placeholder="Why do you need to create a club? (optional)"></textarea>
+      <input id="name" placeholder="Your name"/>
+      <input id="email" placeholder="Email" type="email"/>
+      <input id="department" placeholder="Department (e.g., CS Department)"/>
+      <textarea id="message" placeholder="Message (optional)"></textarea>
 
       <button onclick="sendRequest()">Send request</button>
-      <p><small>Admin will review and provide a key if approved.</small></p>
+      <p><small>Admin will review and send key by email if approved.</small></p>
     </div>
   </div>
 
+  <script src="/app.js"></script>
+  <script src="/nav.js"></script>
   <script>
+    const msg = document.getElementById("msg");
     function show(type, text) {
-      document.getElementById("msg").innerHTML = text ? `<div class="${type}">${text}</div>` : "";
+      msg.innerHTML = text ? `<div class="${type}">${text}</div>` : "";
     }
 
     async function sendRequest() {
@@ -55,10 +54,9 @@
       });
 
       const data = await res.json();
-
       if (!res.ok) return show("err", data.error || "Failed to send request");
 
-      show("ok", "Request sent! Your request id: " + data.requestId);
+      show("ok", "Request sent ✅ Request id: " + data.requestId);
 
       document.getElementById("name").value = "";
       document.getElementById("email").value = "";

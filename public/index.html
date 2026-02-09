@@ -1,20 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <link rel="stylesheet" href="/style.css" />
-  <title>Student Clubs Hub</title>
+  <link rel="stylesheet" href="/style.css"/>
+  <title>Clubs Hub</title>
 </head>
 <body>
   <nav>
     <div class="container">
-      <div>
-        <a href="/index.html"><b>Clubs Hub</b></a>
-        <a href="/clubs.html">Clubs</a>
-        <a href="/profile.html">Profile</a>
-
-      </div>
+      <div id="navLinks"></div>
       <div id="navRight"></div>
     </div>
   </nav>
@@ -22,27 +17,60 @@
   <div class="container">
     <div class="card">
       <h2>Student Clubs Hub</h2>
-      <p>Register, login, create and manage your clubs.</p>
+      <p>Discover clubs, request to join, and follow university activities.</p>
       <div class="row">
-        <a href="/register.html"><button class="secondary">Register</button></a>
-        <a href="/login.html"><button>Login</button></a>
+        <a href="/clubs.html"><button>Open Clubs</button></a>
+        <a href="/request-key.html"><button class="secondary">Request Department Key</button></a>
       </div>
-      <p><small>This is a minimal frontend for the backend course.</small></p>
+      <p><small>Roles: user (join), owner (manage), admin (approve & email).</small></p>
+    </div>
+
+    <div class="row">
+      <div class="card half">
+        <h3 id="statClubs">0</h3>
+        <small>Total clubs</small>
+      </div>
+      <div class="card half">
+        <h3>Email</h3>
+        <small>SendGrid notifications for approvals</small>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="row" style="align-items:center; justify-content:space-between;">
+        <h3 style="margin:0;">Featured Clubs</h3>
+        <div class="row" style="gap:8px;">
+          <button class="secondary" id="prevBtn" type="button">◀</button>
+          <button class="secondary" id="nextBtn" type="button">▶</button>
+        </div>
+      </div>
+
+      <div id="carousel" class="carousel"></div>
+      <small>Tip: you can scroll horizontally too.</small>
+    </div>
+
+    <div class="card">
+      <div class="row" style="align-items:center; justify-content:space-between;">
+        <h3 style="margin:0;">All Clubs</h3>
+        <input id="search" class="half" placeholder="Search by name or category..." />
+      </div>
+
+      <div id="allClubs"></div>
+    </div>
+
+    <div class="card">
+      <h3>How it works</h3>
+      <ol>
+        <li>Users register and browse clubs.</li>
+        <li>Owners create clubs only with a valid department key.</li>
+        <li>Admins approve/decline requests and notify by email.</li>
+      </ol>
     </div>
   </div>
 
+  <!-- ✅ order is important -->
   <script src="/app.js"></script>
-  <script>
-    (async () => {
-      const navRight = document.getElementById("navRight");
-      const profile = await fetchProfile();
-      if (profile) {
-        navRight.innerHTML = `<span style="margin-right:12px;">${profile.username}</span>
-          <button class="secondary" onclick="logout()">Logout</button>`;
-      } else {
-        navRight.innerHTML = `<a href="/login.html">Login</a>`;
-      }
-    })();
-  </script>
+  <script src="/nav.js"></script>
+  <script src="/home.js"></script>
 </body>
 </html>

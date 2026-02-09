@@ -6,6 +6,12 @@ const userRoutes = require("./routes/user.routes");
 const clubRoutes = require("./routes/club.routes");
 const devRoutes = require("./routes/dev.routes");
 const keyRequestRoutes = require("./routes/keyrequest.routes");
+const adminRoutes = require("./routes/admin.routes");
+const publicRoutes = require("./routes/public.routes");
+const joinRoutes = require("./routes/join.routes");
+
+
+
 
 
 const app = express();
@@ -27,5 +33,8 @@ app.use("/users", userRoutes);
 app.use("/clubs", clubRoutes);
 app.use("/dev", devRoutes);
 app.use("/key-requests", keyRequestRoutes);
+app.use("/admin", adminRoutes);
+app.use("/public", publicRoutes);
+app.use("/join", joinRoutes);
 
 module.exports = app;

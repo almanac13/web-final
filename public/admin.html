@@ -4,7 +4,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <link rel="stylesheet" href="/style.css"/>
-  <title>Profile</title>
+  <title>Admin</title>
 </head>
 <body>
   <nav>
@@ -16,21 +16,20 @@
 
   <div class="container">
     <div class="card">
-      <h2>My Profile</h2>
-      <div id="msg"></div>
+      <h2>Key Requests</h2>
+      <div id="reqMsg"></div>
+      <div id="requests"></div>
+    </div>
 
-      <label>Username</label>
-      <input id="username" placeholder="username"/>
-
-      <label>Email</label>
-      <input id="email" placeholder="email" type="email"/>
-
-      <button onclick="saveProfile()">Save</button>
+    <div class="card">
+      <h2>All Clubs</h2>
+      <div id="clubMsg"></div>
+      <div id="clubs"></div>
     </div>
   </div>
 
   <script src="/app.js"></script>
   <script src="/nav.js"></script>
-  <script src="/profile.js"></script>
+  <script src="/admin.js"></script>
 </body>
 </html>
