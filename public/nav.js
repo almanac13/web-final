@@ -9,6 +9,7 @@
     navLinks.innerHTML = `
       <a href="/index.html"><b>Clubs Hub</b></a>
       <a href="/clubs.html">Clubs</a>
+      
     `;
     navRight.innerHTML = `<a href="/login.html">Login</a>`;
     return;
@@ -23,6 +24,7 @@
     <a href="/index.html"><b>Clubs Hub</b></a>
     <a href="/clubs.html">Clubs</a>
     <a href="/profile.html">Profile</a>
+    <a href="/my-clubs.html">My Clubs</a>
     <a href="/request-key.html">Request Key</a>
   `;
 

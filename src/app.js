@@ -9,6 +9,9 @@ const keyRequestRoutes = require("./routes/keyrequest.routes");
 const adminRoutes = require("./routes/admin.routes");
 const publicRoutes = require("./routes/public.routes");
 const joinRoutes = require("./routes/join.routes");
+const myRoutes = require("./routes/my.routes");
+
+
 
 
 
@@ -36,5 +39,6 @@ app.use("/key-requests", keyRequestRoutes);
 app.use("/admin", adminRoutes);
 app.use("/public", publicRoutes);
 app.use("/join", joinRoutes);
+app.use("/my", myRoutes);
 
 module.exports = app;
