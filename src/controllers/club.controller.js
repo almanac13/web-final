@@ -1,6 +1,6 @@
 // src/controllers/club.controller.js
 const Club = require("../models/Club");
-const User = require("../models/user");
+const User = require("../models/User");
 const DepartmentKey = require("../models/DepartmentKey");
 
 // POST /clubs

@@ -1,4 +1,4 @@
-const User = require("../models/user");
+const User = require("../models/User");
 
 async function getProfile(req, res) {
   const user = await User.findById(req.user.userId).select("username email role createdAt");

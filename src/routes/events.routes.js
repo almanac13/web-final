@@ -89,7 +89,7 @@ router.post("/events/:eventId/register", auth, async (req, res) => {
 
     // email user (safe)
     try {
-      const User = require("../models/user");
+      const User = require("../models/User");
       const u = await User.findById(userId).select("email");
       if (u?.email) {
         await sendMail(
