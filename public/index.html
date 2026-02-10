@@ -9,67 +9,81 @@
 <body>
   <nav>
     <div class="container">
-      <div id="navLinks"></div>
-      <div id="navRight"></div>
+      <div class="nav-left" id="navLinks"></div>
+      <div class="nav-right" id="navRight"></div>
     </div>
   </nav>
 
-  <div class="container">
+  <div class="container grid" style="gap:14px;">
     <div class="card">
-      <h2>Student Clubs Hub</h2>
-      <p>Discover clubs, request to join, and follow university activities.</p>
-      <div class="row">
-        <a href="/clubs.html"><button>Open Clubs</button></a>
-        <a href="/request-key.html"><button class="secondary">Request Department Key</button></a>
-      </div>
-      <p><small>Roles: user (join), owner (manage), admin (approve & email).</small></p>
-    </div>
-
-    <div class="row">
-      <div class="card half">
-        <h3 id="statClubs">0</h3>
-        <small>Total clubs</small>
-      </div>
-      <div class="card half">
-        <h3>Email</h3>
-        <small>SendGrid notifications for approvals</small>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="row" style="align-items:center; justify-content:space-between;">
-        <h3 style="margin:0;">Featured Clubs</h3>
-        <div class="row" style="gap:8px;">
-          <button class="secondary" id="prevBtn" type="button">◀</button>
-          <button class="secondary" id="nextBtn" type="button">▶</button>
+      <div class="row between">
+        <div>
+          <h1>Find your club</h1>
+          <p>Discover communities, join events, and follow tournaments. Owners manage clubs. Admin approves keys.</p>
+          <div class="row">
+            <a href="/clubs.html"><button>Explore Clubs</button></a>
+            <a href="/my-clubs.html"><button class="secondary">My Clubs</button></a>
+          </div>
         </div>
+        <div class="badge ok">JWT • RBAC • SendGrid</div>
+      </div>
+    </div>
+
+    <div class="grid grid-2">
+      <div class="card">
+        <div class="row between">
+          <h2 style="margin:0;">Featured Clubs</h2>
+          <div class="row">
+            <button class="secondary" id="prevBtn" type="button">◀</button>
+            <button class="secondary" id="nextBtn" type="button">▶</button>
+          </div>
+        </div>
+        <div id="carousel" class="carousel"></div>
+        <small>Scroll horizontally or use arrows.</small>
       </div>
 
-      <div id="carousel" class="carousel"></div>
-      <small>Tip: you can scroll horizontally too.</small>
+      <div class="card">
+        <h2 style="margin-bottom:6px;">Quick Stats</h2>
+        <div class="row">
+          <div class="card soft half">
+            <h2 id="statClubs" style="margin:0;">0</h2>
+            <small>Total clubs</small>
+          </div>
+          <div class="card soft half">
+            <h2 style="margin:0;">Fast</h2>
+            <small>Simple UI + animations</small>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="label">Search</div>
+          <input id="search" placeholder="Search by club name or category..."/>
+        </div>
+        <small>Tip: join a club from the list below.</small>
+      </div>
     </div>
 
     <div class="card">
-      <div class="row" style="align-items:center; justify-content:space-between;">
-        <h3 style="margin:0;">All Clubs</h3>
-        <input id="search" class="half" placeholder="Search by name or category..." />
+      <div class="row between">
+        <h2 style="margin:0;">All Clubs</h2>
+        <span class="badge" id="filterBadge">Showing all</span>
       </div>
-
-      <div id="allClubs"></div>
+      <div id="allClubs" class="grid"></div>
     </div>
 
     <div class="card">
-      <h3>How it works</h3>
-      <ol>
-        <li>Users register and browse clubs.</li>
-        <li>Owners create clubs only with a valid department key.</li>
-        <li>Admins approve/decline requests and notify by email.</li>
-      </ol>
+      <h2>How it works</h2>
+      <div class="grid" style="gap:10px;">
+        <div class="badge">1) Register/Login</div>
+        <div class="badge">2) Request to join clubs</div>
+        <div class="badge">3) Owners approve requests</div>
+        <div class="badge">4) Events & tournaments (next step)</div>
+      </div>
     </div>
   </div>
 
-  <!-- ✅ order is important -->
   <script src="/app.js"></script>
+  <script src="/ui.js"></script>
   <script src="/nav.js"></script>
   <script src="/home.js"></script>
 </body>

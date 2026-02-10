@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="stylesheet" href="/style.css"/>
+  <title>Club</title>
+</head>
+<body>
+<nav>
+  <div class="container">
+    <div class="nav-left" id="navLinks"></div>
+    <div class="nav-right" id="navRight"></div>
+  </div>
+</nav>
+
+<div class="container grid" style="gap:14px;">
+  <div class="card">
+    <div class="row between">
+      <div>
+        <h1 id="clubName">Club</h1>
+        <div class="row">
+          <span class="badge" id="clubCategory">category</span>
+          <span class="badge" id="clubDept">dept</span>
+        </div>
+      </div>
+      <div class="row">
+        <button class="secondary" id="joinBtn" type="button">Request to join</button>
+        <button id="createEventBtn" type="button" style="display:none;">+ Create event</button>
+      </div>
+    </div>
+    <p id="clubDesc"></p>
+  </div>
+
+  <div class="card">
+    <div class="row between">
+      <h2 style="margin:0;">Events & Tournaments</h2>
+      <span class="badge" id="evCount">0</span>
+    </div>
+    <div id="eventsList" class="grid"></div>
+  </div>
+</div>
+
+<!-- modal -->
+<div id="modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.55); z-index:1000;">
+  <div class="container" style="max-width:720px; margin-top:70px;">
+    <div class="card" style="animation: pop .22s ease;">
+      <div class="row between">
+        <h2 style="margin:0;">Create Event</h2>
+        <button class="secondary" type="button" id="closeModal">Close</button>
+      </div>
+
+      <div class="grid" style="gap:10px;">
+        <div class="field">
+          <div class="label">Title *</div>
+          <input id="evTitle" placeholder="Chess Tournament / Workshop..." />
+        </div>
+
+        <div class="row">
+          <div class="field half">
+            <div class="label">Type *</div>
+            <select id="evType">
+              <option value="activity">Activity</option>
+              <option value="tournament">Tournament</option>
+            </select>
+          </div>
+          <div class="field half">
+            <div class="label">Date & time *</div>
+            <input id="evDate" type="datetime-local"/>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field half">
+            <div class="label">Location</div>
+            <input id="evLocation" placeholder="Room 101 / Stadium" />
+          </div>
+          <div class="field half">
+            <div class="label">Capacity (0 = unlimited)</div>
+            <input id="evCap" type="number" min="0" value="0"/>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="label">Description</div>
+          <textarea id="evDesc" placeholder="What will happen? rules? prizes?"></textarea>
+        </div>
+
+        <button id="saveEventBtn" type="button">Create</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/app.js"></script>
+<script src="/ui.js"></script>
+<script src="/nav.js"></script>
+<script src="/club.js"></script>
+</body>
+</html>

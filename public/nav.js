@@ -1,40 +1,46 @@
 (async () => {
-  const navRight = document.getElementById("navRight");
   const navLinks = document.getElementById("navLinks");
-  if (!navRight || !navLinks) return;
+  const navRight = document.getElementById("navRight");
+  if (!navLinks || !navRight) return;
 
   const profile = await fetchProfile();
 
+  // left
+  navLinks.innerHTML = `
+    <a class="brand" href="/index.html">
+      <span class="logo"></span><span>Clubs Hub</span>
+    </a>
+    <a class="nav-link" href="/clubs.html">Clubs</a>
+  `;
+
   if (!profile) {
-    navLinks.innerHTML = `
-      <a href="/index.html"><b>Clubs Hub</b></a>
-      <a href="/clubs.html">Clubs</a>
-      
+    navRight.innerHTML = `
+      <a class="nav-link" href="/login.html">Login</a>
+      <a class="nav-link" href="/register.html">Register</a>
     `;
-    navRight.innerHTML = `<a href="/login.html">Login</a>`;
     return;
   }
 
+  // add more links
+  navLinks.innerHTML += `
+    <a class="nav-link" href="/my-clubs.html">My Clubs</a>
+    
+    <a class="nav-link" href="/profile.html">Profile</a>
+    <a class="nav-link" href="/request-key.html">Request Key</a>
+  `;
+  navLinks.innerHTML += `<a class="nav-link" href="/my-events.html">My Events</a>`;
+
+
+  if (profile.role === "owner") {
+    navLinks.innerHTML += `<a class="nav-link" href="/owner-requests.html">Requests</a>`;
+  }
+  if (profile.role === "admin") {
+    navLinks.innerHTML += `<a class="nav-link" href="/admin.html">Admin</a>`;
+  }
+
+  // right
   navRight.innerHTML = `
-    <span style="margin-right:12px;">${profile.username} (${profile.role})</span>
+    <span class="badge">${escapeHtml(profile.username)} (${escapeHtml(profile.role)})</span>
     <button class="secondary" onclick="logout()">Logout</button>
   `;
-
-  let links = `
-    <a href="/index.html"><b>Clubs Hub</b></a>
-    <a href="/clubs.html">Clubs</a>
-    <a href="/profile.html">Profile</a>
-    <a href="/my-clubs.html">My Clubs</a>
-    <a href="/request-key.html">Request Key</a>
-  `;
-
-  if (profile.role === "admin") {
-    links += `<a href="/admin.html">Admin</a>`;
-  }
-  if (profile.role === "owner") {
-  links += `<a href="/owner-requests.html">Requests</a>`;
-}
-
-
-  navLinks.innerHTML = links;
 })();

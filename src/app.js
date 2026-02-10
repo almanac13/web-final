@@ -10,10 +10,7 @@ const adminRoutes = require("./routes/admin.routes");
 const publicRoutes = require("./routes/public.routes");
 const joinRoutes = require("./routes/join.routes");
 const myRoutes = require("./routes/my.routes");
-
-
-
-
+const eventsRoutes = require("./routes/events.routes");
 
 
 
@@ -40,5 +37,6 @@ app.use("/admin", adminRoutes);
 app.use("/public", publicRoutes);
 app.use("/join", joinRoutes);
 app.use("/my", myRoutes);
+app.use("/", eventsRoutes);
 
 module.exports = app;
