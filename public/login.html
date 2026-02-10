@@ -10,30 +10,64 @@
   <nav><div class="container"><a href="/index.html"><b>Clubs Hub</b></a></div></nav>
 
   <div class="container">
-    <div class="card">
+    <div class="card form-card">
       <h2>Login</h2>
+      
       <div id="msg"></div>
 
-      <input id="email" placeholder="email" type="email" required />
-      <input id="password" placeholder="password" type="password" required />
-      <button onclick="login()">Login</button>
+      <div class="form-group">
+        <label class="form-label">Email Address</label>
+        <input 
+          id="email" 
+          type="email" 
+          class="form-input" 
+          placeholder="your.email@example.com" 
+          required 
+        />
+      </div>
 
-      <p><small>No account? <a href="/register.html">Register</a></small></p>
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <input 
+          id="password" 
+          type="password" 
+          class="form-input" 
+          placeholder="Enter your password" 
+          required 
+        />
+      </div>
+
+      <button class="form-btn" onclick="login()">Sign In</button>
+
+      <div class="form-divider">
+        <span>No account?</span>
+      </div>
+      
+      <p class="text-center" style="color: var(--muted);">
+        <a href="/register.html" style="color: var(--brand);">Create an account</a>
+      </p>
     </div>
   </div>
 
   <script src="/app.js"></script>
   <script>
     function show(type, text) {
-      document.getElementById("msg").innerHTML = `<div class="${type}">${text}</div>`;
+      const typeClass = type === "err" ? "form-message-error" : "form-message-success";
+      document.getElementById("msg").innerHTML = `<div class="${typeClass}">${text}</div>`;
     }
 
     async function login() {
       const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value;
 
-      if (!email.includes("@")) return show("err", "Email looks invalid.");
-      if (!password) return show("err", "Password required.");
+      if (!email.includes("@")) {
+        show("err", "Please enter a valid email address.");
+        return;
+      }
+      if (!password) {
+        show("err", "Password is required.");
+        return;
+      }
 
       const res = await fetch("/auth/login", {
         method: "POST",
@@ -44,9 +78,15 @@
       const data = await res.json();
       if (!res.ok) return show("err", data.error || "Login failed");
 
+      show("ok", "Login successful! Redirecting...");
       setToken(data.token);
-      window.location.href = "/clubs.html";
+      setTimeout(() => window.location.href = "/clubs.html", 800);
     }
+
+    // Enter key support
+    document.getElementById("password").addEventListener("keypress", function(e) {
+      if (e.key === "Enter") login();
+    });
   </script>
 </body>
 </html>

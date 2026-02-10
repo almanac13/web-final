@@ -1,46 +1,61 @@
+// Обновленный nav.js
 (async () => {
-  const navLinks = document.getElementById("navLinks");
-  const navRight = document.getElementById("navRight");
+  // Находим элементы по ID или по классу
+  let navLinks = document.getElementById("navLinks");
+  let navRight = document.getElementById("navRight");
+  
+  // Если не найдены по ID, ищем по классу
+  if (!navLinks) navLinks = document.querySelector('.nav-left');
+  if (!navRight) navRight = document.querySelector('.nav-right');
+  
   if (!navLinks || !navRight) return;
 
   const profile = await fetchProfile();
 
-  // left
+  // Left navigation
   navLinks.innerHTML = `
-    <a class="brand" href="/index.html">
-      <span class="logo"></span><span>Clubs Hub</span>
+    <a href="/index.html" style="display: flex; align-items: center; gap: 10px; font-weight: 700; color: inherit; text-decoration: none;">
+      <span style="width: 30px; height: 30px; border-radius: 10px; background: linear-gradient(135deg, #2563eb, #60a5fa);"></span>
+      <span>Clubs Hub</span>
     </a>
-    <a class="nav-link" href="/clubs.html">Clubs</a>
+    <a href="/clubs.html" style="padding: 10px 14px; border-radius: 12px; color: #475569; text-decoration: none;">Clubs</a>
   `;
 
   if (!profile) {
     navRight.innerHTML = `
-      <a class="nav-link" href="/login.html">Login</a>
-      <a class="nav-link" href="/register.html">Register</a>
+      <a href="/login.html" style="padding: 10px 14px; border-radius: 12px; color: #475569; text-decoration: none;">Login</a>
+      <a href="/register.html" style="padding: 10px 14px; border-radius: 12px; color: #475569; text-decoration: none;">Register</a>
     `;
     return;
   }
 
-  // add more links
+  // Add more links
   navLinks.innerHTML += `
-    <a class="nav-link" href="/my-clubs.html">My Clubs</a>
-    
-    <a class="nav-link" href="/profile.html">Profile</a>
-    <a class="nav-link" href="/request-key.html">Request Key</a>
+    <a href="/my-clubs.html" style="padding: 10px 14px; border-radius: 12px; color: #475569; text-decoration: none;">My Clubs</a>
+    <a href="/profile.html" style="padding: 10px 14px; border-radius: 12px; color: #2563eb; text-decoration: none;">Profile</a>
+    <a href="/request-key.html" style="padding: 10px 14px; border-radius: 12px; color: #475569; text-decoration: none;">Request Key</a>
+    <a href="/my-events.html" style="padding: 10px 14px; border-radius: 12px; color: #475569; text-decoration: none;">My Events</a>
   `;
-  navLinks.innerHTML += `<a class="nav-link" href="/my-events.html">My Events</a>`;
-
 
   if (profile.role === "owner") {
-    navLinks.innerHTML += `<a class="nav-link" href="/owner-requests.html">Requests</a>`;
+    navLinks.innerHTML += `<a href="/owner-requests.html" style="padding: 10px 14px; border-radius: 12px; color: #475569; text-decoration: none;">Requests</a>`;
   }
   if (profile.role === "admin") {
-    navLinks.innerHTML += `<a class="nav-link" href="/admin.html">Admin</a>`;
+    navLinks.innerHTML += `<a href="/admin.html" style="padding: 10px 14px; border-radius: 12px; color: #475569; text-decoration: none;">Admin</a>`;
   }
 
-  // right
+  // Right side
   navRight.innerHTML = `
-    <span class="badge">${escapeHtml(profile.username)} (${escapeHtml(profile.role)})</span>
-    <button class="secondary" onclick="logout()">Logout</button>
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <div style="text-align: right;">
+        <div style="font-weight: 500;">${escapeHtml(profile.username)}</div>
+        <div style="font-size: 0.8rem; color: #64748b;">${escapeHtml(profile.role)}</div>
+      </div>
+      <button onclick="logout()" style="padding: 8px 16px; border-radius: 10px; background: rgba(15,23,42,.06); border: 1px solid rgba(15,23,42,.12); cursor: pointer;">Logout</button>
+    </div>
   `;
 })();
+
+function escapeHtml(s) {
+  return String(s || "").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;");
+}
