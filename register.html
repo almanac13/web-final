@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="stylesheet" href="/style.css" />
+  <title>Register</title>
+</head>
+<body>
+  <nav><div class="container"><a href="/index.html"><b>Clubs Hub</b></a></div></nav>
+
+  <div class="container">
+    <div class="card form-card">
+      <h2>Create Account</h2>
+      
+      <div id="msg"></div>
+
+      <div class="form-group">
+        <label class="form-label">Username</label>
+        <input 
+          id="username" 
+          type="text" 
+          class="form-input" 
+          placeholder="Choose a username" 
+          minlength="3"
+          required 
+        />
+        <small style="color: var(--muted); margin-top: 4px; display: block;">At least 3 characters</small>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Email Address</label>
+        <input 
+          id="email" 
+          type="email" 
+          class="form-input" 
+          placeholder="your.email@example.com" 
+          required 
+        />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <input 
+          id="password" 
+          type="password" 
+          class="form-input" 
+          placeholder="Create a strong password" 
+          minlength="6"
+          required 
+        />
+        <small style="color: var(--muted); margin-top: 4px; display: block;">At least 6 characters</small>
+      </div>
+
+      <button class="form-btn" onclick="register()">Create Account</button>
+
+      <div class="form-divider">
+        <span>Already have an account?</span>
+      </div>
+      
+      <p class="text-center" style="color: var(--muted);">
+        <a href="/login.html" style="color: var(--brand);">Sign in here</a>
+      </p>
+    </div>
+  </div>
+
+  <script src="/app.js"></script>
+  <script>
+    function show(type, text) {
+      const typeClass = type === "err" ? "form-message-error" : "form-message-success";
+      document.getElementById("msg").innerHTML = `<div class="${typeClass}">${text}</div>`;
+    }
+
+    async function register() {
+      const username = document.getElementById("username").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+
+      if (username.length < 3) {
+        show("err", "Username must be at least 3 characters.");
+        return;
+      }
+      if (!email.includes("@")) {
+        show("err", "Please enter a valid email address.");
+        return;
+      }
+      if (password.length < 6) {
+        show("err", "Password must be at least 6 characters.");
+        return;
+      }
+
+      const res = await fetch("/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, email, password })
+      });
+
+      const data = await res.json();
+      if (!res.ok) return show("err", data.error || "Registration failed");
+
+      show("ok", "Account created! Redirecting to login...");
+      setTimeout(() => window.location.href = "/login.html", 1500);
+    }
+
+    // Enter key support
+    document.getElementById("password").addEventListener("keypress", function(e) {
+      if (e.key === "Enter") register();
+    });
+  </script>
+</body>
+</html>
