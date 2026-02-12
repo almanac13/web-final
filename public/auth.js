@@ -16,5 +16,6 @@ async function login() {
   }
 
   localStorage.setItem("token", data.token);
-  window.location.href = "/clubs.html";
+  // Redirect to the main landing page (index) instead of clubs list
+  window.location.href = "/";
 }

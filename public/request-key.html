@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="stylesheet" href="/style.css"/>
+  <title>Request Key</title>
+</head>
+<body>
+  <nav>
+    <div class="container">
+      <div class="nav-left" id="navLinks"></div>
+      <div class="nav-right" id="navRight"></div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="card">
+      <h2>Request Department Key</h2>
+      <div id="msg"></div>
+
+      <input id="name" placeholder="Your name"/>
+      <input id="email" placeholder="Email" type="email"/>
+      <input id="department" placeholder="Department (e.g., CS Department)"/>
+      <textarea id="message" placeholder="Message (optional)"></textarea>
+
+      <button onclick="sendRequest()">Send request</button>
+      <p><small>Admin will review and send key by email if approved.</small></p>
+    </div>
+  </div>
+
+  <script src="/app.js"></script>
+  <script src="/nav.js"></script>
+  <script>
+    const msg = document.getElementById("msg");
+    function show(type, text) {
+      msg.innerHTML = text ? `<div class="${type}">${text}</div>` : "";
+    }
+
+    async function sendRequest() {
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const department = document.getElementById("department").value.trim();
+      const message = document.getElementById("message").value.trim();
+
+      if (name.length < 2) return show("err", "Name must be at least 2 characters.");
+      if (!email.includes("@")) return show("err", "Email looks invalid.");
+      if (department.length < 2) return show("err", "Department required.");
+
+      const res = await fetch("/key-requests", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, department, message })
+      });
+
+      const data = await res.json();
+      if (!res.ok) return show("err", data.error || "Failed to send request");
+
+      show("ok", "Request sent ✅ Request id: " + data.requestId);
+
+      document.getElementById("name").value = "";
+      document.getElementById("email").value = "";
+      document.getElementById("department").value = "";
+      document.getElementById("message").value = "";
+    }
+  </script>
+</body>
+</html>

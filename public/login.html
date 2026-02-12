@@ -80,7 +80,8 @@
 
       show("ok", "Login successful! Redirecting...");
       setToken(data.token);
-      setTimeout(() => window.location.href = "/clubs.html", 800);
+      // Redirect to homepage after login
+      setTimeout(() => window.location.href = "/", 800);
     }
 
     // Enter key support
