@@ -4,40 +4,40 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <link rel="stylesheet" href="/style.css"/>
-  <title>Clubs</title>
+  <title>Clubs Store</title>
 </head>
 <body>
-  <nav>
-    <div class="container">
-      <div class="nav-left" id="navLinks"></div>
-      <div class="nav-right" id="navRight"></div>
-    </div>
-  </nav>
-
+<nav>
   <div class="container">
-    <div class="card">
-      <h2>My Clubs</h2>
-      <div id="msg"></div>
+    <div class="nav-left" id="navLinks"></div>
+    <div class="nav-right" id="navRight"></div>
+  </div>
+</nav>
 
-      <h3>Create Club</h3>
-      <div class="row">
-        <input class="half" id="name" placeholder="Club name (min 2)"/>
-        <input class="half" id="category" placeholder="Category (min 2)"/>
+<div class="container">
+  <div class="card">
+    <div class="row between">
+      <div>
+        <h1 style="margin:0;">Clubs Store</h1>
+        <p style="margin:6px 0 0 0;">Browse all university clubs, open details, join, and follow events.</p>
       </div>
-      <textarea id="description" placeholder="Description (optional)"></textarea>
-      <input id="deptKey" placeholder="Department Key (required to create club)"/>
-      <button onclick="createClub()">Create</button>
-      <p><small>No key? <a href="/request-key.html">Request a department key</a></small></p>
+      <span class="badge" id="countBadge">0 clubs</span>
     </div>
 
-    <div class="card">
-      <h3>List</h3>
-      <div id="list"></div>
+    <div class="row" style="margin-top:10px;">
+      <input id="q" class="half" placeholder="Search by club name or category..." />
+      <select id="cat" class="half">
+        <option value="">All categories</option>
+      </select>
     </div>
   </div>
 
-  <script src="/app.js"></script>
-  <script src="/nav.js"></script>
-  <script src="/clubs.js"></script>
+  <div id="grid" class="grid" style="margin-top:14px;"></div>
+</div>
+
+<script src="/app.js"></script>
+<script src="/ui.js"></script>
+<script src="/nav.js"></script>
+<script src="/clubs-store.js"></script>
 </body>
 </html>
