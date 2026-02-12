@@ -5,7 +5,7 @@
 
   const profile = await fetchProfile();
 
-  // ✅ Brand (always)
+  // Brand (always)
   navLinks.innerHTML = `
     <a class="brand" href="/index.html">
       <span class="logo"></span>
@@ -13,7 +13,7 @@
     </a>
   `;
 
-  // ✅ Not logged in
+  // Not logged in
   if (!profile) {
     navLinks.innerHTML += `
       <a class="nav-link" href="/clubs.html">Clubs Store</a>
@@ -25,7 +25,7 @@
     return;
   }
 
-  // ✅ Logged in (base links)
+  // Logged in (base links)
   navLinks.innerHTML += `
     <a class="nav-link" href="/clubs.html">Clubs</a>
     <a class="nav-link" href="/my-clubs.html">My Clubs</a>
@@ -33,7 +33,7 @@
     <a class="nav-link" href="/profile.html">Profile</a>
   `;
 
-  // ✅ Role links
+  // Role links
   if (profile.role === "owner") {
     navLinks.innerHTML += `<a class="nav-link" href="/owner-requests.html">Requests</a>`;
   }
@@ -42,7 +42,7 @@
     navLinks.innerHTML += `<a class="nav-link" href="/admin.html">Admin</a>`;
   }
 
-  // ✅ Right side user box
+  // Right side user box
   navRight.innerHTML = `
     <div class="row" style="align-items:center;">
       <div style="text-align:right;">

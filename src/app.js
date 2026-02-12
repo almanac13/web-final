@@ -12,23 +12,28 @@ const joinRoutes = require("./routes/join.routes");
 const myRoutes = require("./routes/my.routes");
 const eventsRoutes = require("./routes/events.routes");
 
-
+// ADD THESE TWO
+const notFound = require("./middleware/notFound");
+const errorHandler = require("./middleware/errorHandler");
 
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// ✅ 1) абсолютный путь к public
+// Absolute path to public
 const publicDir = path.resolve(__dirname, "..", "public");
 app.use(express.static(publicDir));
 
-// ✅ 2) home отдаёт index.html из public
+//Home route
 app.get("/", (req, res) => {
   res.sendFile(path.join(publicDir, "index.html"));
 });
 
+// Routes
 app.use("/auth", authRoutes);
+app.use("/", authRoutes); // allows /register and /login directly
+
 app.use("/users", userRoutes);
 app.use("/clubs", clubRoutes);
 app.use("/dev", devRoutes);
@@ -38,5 +43,9 @@ app.use("/public", publicRoutes);
 app.use("/join", joinRoutes);
 app.use("/my", myRoutes);
 app.use("/", eventsRoutes);
+
+//  MUST BE LAST (after all routes)
+app.use(notFound);
+app.use(errorHandler);
 
 module.exports = app;

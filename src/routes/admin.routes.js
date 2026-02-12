@@ -10,13 +10,13 @@ const Club = require("../models/Club");
 
 const { sendMail } = require("../utils/mailer");
 
-// ✅ GET all key requests
+// GET all key requests
 router.get("/key-requests", auth, requireAdmin, async (req, res) => {
   const requests = await KeyRequest.find().sort({ createdAt: -1 });
   res.json(requests);
 });
 
-// ✅ APPROVE key request (create department key + email)
+// APPROVE key request (create department key + email)
 router.post("/key-requests/:id/approve", auth, requireAdmin, async (req, res) => {
   const reqDoc = await KeyRequest.findById(req.params.id);
   if (!reqDoc) return res.status(404).json({ error: "Request not found" });
@@ -41,7 +41,7 @@ router.post("/key-requests/:id/approve", auth, requireAdmin, async (req, res) =>
   res.json({ message: "Approved and email sent", key: keyValue });
 });
 
-// ❌ DECLINE key request (email)
+// DECLINE key request (email)
 router.post("/key-requests/:id/decline", auth, requireAdmin, async (req, res) => {
   const reqDoc = await KeyRequest.findById(req.params.id);
   if (!reqDoc) return res.status(404).json({ error: "Request not found" });
@@ -58,7 +58,7 @@ router.post("/key-requests/:id/decline", auth, requireAdmin, async (req, res) =>
   res.json({ message: "Declined and email sent" });
 });
 
-// ✅ GET all clubs (admin only)
+// GET all clubs (admin only)
 router.get("/clubs", auth, requireAdmin, async (req, res) => {
   const clubs = await Club.find().populate("owner", "email username");
   res.json(clubs);

@@ -9,7 +9,7 @@ router.get("/clubs", async (req, res) => {
   res.json(clubs);
 });
 
-// ✅ club details
+// club details
 router.get("/clubs/:id", async (req, res) => {
   const club = await Club.findById(req.params.id)
     .select("name category description department createdAt owner");
@@ -17,7 +17,7 @@ router.get("/clubs/:id", async (req, res) => {
   res.json(club);
 });
 
-// ✅ list events of club
+//  list events of club
 router.get("/clubs/:id/events", async (req, res) => {
   const events = await Event.find({ club: req.params.id })
     .select("title type description date location capacity createdAt")

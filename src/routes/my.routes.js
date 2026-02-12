@@ -2,7 +2,7 @@ const router = require("express").Router();
 const auth = require("../middleware/auth");
 const JoinRequest = require("../models/JoinRequest");
 
-// ✅ My clubs = approved join requests
+// My clubs = approved join requests
 router.get("/clubs", auth, async (req, res) => {
   const userId = req.user?.userId;
   if (!userId) return res.status(401).json({ error: "Invalid token payload (no userId)" });

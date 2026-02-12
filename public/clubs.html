@@ -19,7 +19,7 @@
     <div class="row between">
       <div>
         <h1 style="margin:0;">Clubs Store</h1>
-        <p style="margin:6px 0 0 0;">Browse all university clubs, open details, join, and follow events.</p>
+        <p style="margin:6px 0 0 0;">Browse clubs, open details, join, and participate in events.</p>
       </div>
       <span class="badge" id="countBadge">0 clubs</span>
     </div>
@@ -33,6 +33,63 @@
   </div>
 
   <div id="grid" class="grid" style="margin-top:14px;"></div>
+
+  <!-- ✅ bottom create block -->
+  <div class="card soft" style="margin-top:14px;">
+    <div class="row between">
+      <div>
+        <h2 style="margin:0;">Create your own club</h2>
+        <p style="margin:6px 0 0 0;">
+          Owners can create and manage clubs, events, and members.
+        </p>
+      </div>
+      <button id="openCreateClub" type="button">+ Create Club</button>
+    </div>
+    <small id="createHint">Login as owner/admin to create a club.</small>
+  </div>
+</div>
+
+<!-- ✅ Create Club Modal -->
+<div id="clubModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.45); z-index:1000;">
+  <div class="container" style="max-width:720px; margin-top:70px;">
+    <div class="card" style="animation: pop .22s ease;">
+      <div class="row between">
+        <h2 style="margin:0;">Create Club</h2>
+        <button class="secondary" id="closeClubModal" type="button">Close</button>
+      </div>
+
+      <div class="grid" style="gap:10px;">
+        <div class="field">
+          <div class="label">Club name *</div>
+          <input id="clubName" placeholder="AITU Chess Club" />
+        </div>
+
+        <div class="row">
+          <div class="field half">
+            <div class="label">Category *</div>
+            <input id="clubCategory" placeholder="Sports / Tech / Art..." />
+          </div>
+          <div class="field half">
+            <div class="label">Department</div>
+            <input id="clubDept" placeholder="SE / Cybersecurity / Business..." />
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="label">Description *</div>
+          <textarea id="clubDesc" placeholder="What does your club do? Goals, activities, achievements..."></textarea>
+        </div>
+        <div class="field">
+  <div class="label">Department Key *</div>
+  <input id="deptKey" placeholder="Example: AITU-SE-2026" />
+  <small>Get this key from university department.</small>
+</div>
+
+
+        <button id="createClubBtn" type="button">Create</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script src="/app.js"></script>

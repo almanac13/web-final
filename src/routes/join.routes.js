@@ -6,7 +6,7 @@ const JoinRequest = require("../models/JoinRequest");
 const Club = require("../models/Club");
 const { sendMail } = require("../utils/mailer");
 
-// 📨 CREATE join request (USER)
+// CREATE join request (USER)
 router.post("/:clubId", auth, async (req, res) => {
   try {
     const club = await Club.findById(req.params.clubId).populate("owner", "email");
@@ -51,7 +51,7 @@ router.post("/:clubId", auth, async (req, res) => {
   }
 });
 
-// 📥 OWNER: view requests for owner clubs
+// OWNER: view requests for owner clubs
 router.get("/owner/all", auth, async (req, res) => {
   try {
     const ownerId = req.user?.userId;
@@ -72,7 +72,7 @@ router.get("/owner/all", auth, async (req, res) => {
   }
 });
 
-// ✅ OWNER: approve join request
+// OWNER: approve join request
 router.post("/:id/approve", auth, async (req, res) => {
   try {
     const ownerId = req.user?.userId;
@@ -111,7 +111,7 @@ router.post("/:id/approve", auth, async (req, res) => {
   }
 });
 
-// ❌ OWNER: decline join request
+// OWNER: decline join request
 router.post("/:id/decline", auth, async (req, res) => {
   try {
     const ownerId = req.user?.userId;

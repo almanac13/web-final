@@ -2,9 +2,10 @@ const mongoose = require("mongoose");
 
 const departmentKeySchema = new mongoose.Schema(
   {
-    department: { type: String, required: true, trim: true },
-    key: { type: String, required: true, unique: true, trim: true },
+    code: { type: String, required: true, unique: true }, // e.g. AITU-SE-2026
+    department: { type: String, required: true },         // e.g. SE
     isActive: { type: Boolean, default: true },
+    usesLeft: { type: Number, default: 1 },               // 1 = one-time, 999 = many uses
   },
   { timestamps: true }
 );

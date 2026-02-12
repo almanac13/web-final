@@ -8,7 +8,7 @@ async function connectDB() {
   console.log("DEBUG URI starts with:", uri.slice(0, 20));
 
   await mongoose.connect(uri, { serverSelectionTimeoutMS: 10000 });
-  console.log("✅ MongoDB connected");
+  console.log("MongoDB connected");
 }
 
 module.exports = connectDB;

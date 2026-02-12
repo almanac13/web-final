@@ -376,3 +376,48 @@ nav a:hover {
   background: rgba(15,23,42,.05) !important;
   transform: translateY(-1px) !important;
 }
+
+/* -----------------------------
+   Additional responsive tweaks
+   ----------------------------- */
+@media (max-width: 640px) {
+  .container { padding: 12px; }
+
+  .brand { font-size: 18px; gap: 8px; }
+  .logo { width: 30px; height: 30px; border-radius: 10px; }
+
+  nav .container { flex-direction: column; align-items: stretch; gap: 8px; }
+  .nav-left, .nav-right { width: 100%; justify-content: space-between; }
+
+  h1 { font-size: 28px; }
+  h2 { font-size: 20px; }
+
+  .card { padding: 12px; border-radius: 12px; }
+  .half { flex-basis: 100%; min-width: 0; }
+
+  /* make row buttons stack and expand on small screens */
+  .row.between { flex-direction: column; align-items: stretch; gap: 8px; }
+  .row > button, .row > a { width: 100%; }
+
+  /* form/button sizing */
+  .form-card { padding: 20px; margin: 18px auto; }
+  .form-btn, .form-btn-secondary { padding: 12px; }
+
+  /* carousel / club cards */
+  .carousel { padding: 8px 0; gap: 8px; }
+  .clubCard { min-width: 220px; max-width: 100%; }
+
+  .badge { font-size: 11px; padding: 6px 8px; }
+  .toast { min-width: 200px; }
+}
+
+@media (max-width: 420px) {
+  .brand { font-size: 16px; }
+  h1 { font-size: 22px; }
+  nav .container { padding: 10px; }
+
+  /* tighten spacing on very small devices */
+  body { --radius: 14px; }
+  .card { border-radius: 14px; }
+  .form-card { margin: 12px; padding: 16px; }
+}
